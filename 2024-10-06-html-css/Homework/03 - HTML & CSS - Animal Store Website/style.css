@@ -1,0 +1,28 @@
+html,body {
+    direction: rtl;
+    background-color: rgba(36, 182, 182, 0.944);
+}
+
+.headlinename {
+    text-align: center;
+}
+
+nav {
+        text-align: center;
+}
+a {
+    padding: 25px;
+}
+.copyright{
+    text-align: center;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+.bold-text {
+    font-weight: bold;
+}
+  

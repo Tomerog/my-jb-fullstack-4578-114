@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animal Table</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <!-- Link to the external CSS file -->
+    <style>
+      .img-circle {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Animal</th>
+            <th scope="col">Price</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kitten</td>
+            <td>$70.00</td>
+            <td><img src="kitten.jpg" alt="Kitten" class="img-circle" /></td>
+          </tr>
+          <tr>
+            <td>Puppy</td>
+            <td>$80.00</td>
+            <td><img src="puppy.jpg" alt="Puppy" class="img-circle" /></td>
+          </tr>
+          <tr>
+            <td>Bunny</td>
+            <td>$30.00</td>
+            <td><img src="bunny.jpg" alt="Bunny" class="img-circle" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

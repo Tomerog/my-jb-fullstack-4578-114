@@ -1,0 +1,28 @@
+
+.container {
+    display: flex;
+/* border: 1px solid red;
+background-color: lightgreen; */
+
+}
+
+p {
+    border: 2px black solid;
+    /* background-color: lightblue; */
+    text-align: justify;
+    padding: 25px 15px;
+    margin: 10px;
+}
+p:nth-child(1){
+    color: red;
+}
+p:nth-child(2){
+    color: yellow;
+  
+}
+p:nth-child(3){
+    color: green;
+}
+a {
+    color: inherit;
+} 

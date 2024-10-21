@@ -1,0 +1,39 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    direction: rtl;
+    background-image:url(/istockphoto-1318680899-612x612.jpg) ;
+}
+
+
+
+.header-text {
+    color: rgb(128, 0, 0);
+}
+/* why does it not work on the caption? */
+.login-table {
+    border: solid 1px;
+    margin-bottom: 150px;
+}
+.left {
+    text-align: left;
+}
+input[type="text"]{
+    background-color: yellow;
+    
+}
+input[type="password"]{
+    background-color: yellow;
+    
+}
+#img-container{
+    
+}
+img {
+    width: 200px;
+    height: 200px;
+}
+#copyrights {
+    font-weight: bold;
+}
