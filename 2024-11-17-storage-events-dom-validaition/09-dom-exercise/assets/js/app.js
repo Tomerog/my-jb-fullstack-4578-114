@@ -1,18 +1,18 @@
-function change() {
-
+// function change() {
+// 
     // get access DOM elements
-    const colorInput = document.getElementById('colorInput') 
-    const textInput = document.getElementById('textInput') 
-    const myParagraph = document.getElementById('myParagraph')
+    // const colorInput = document.getElementById('colorInput') 
+    // const textInput = document.getElementById('textInput') 
+    // const myParagraph = document.getElementById('myParagraph')
 
     // extract values from the 2 inputs
-    const newColor = colorInput.value
-    const newText = textInput.value
+    // const newColor = colorInput.value
+    // const newText = textInput.value
 
     // myParagraph.className = 'redBackground'
     // myParagraph.classList.add('purple')
-    myParagraph.style.backgroundColor = newColor
-    myParagraph.innerText = newText
+    // myParagraph.style.backgroundColor = newColor
+    // myParagraph.innerText = newText
 
 
     // this is a shorthand version of the code....
@@ -20,4 +20,16 @@ function change() {
     // document.getElementById('myParagraph').innerText = document.getElementById('textInput').value
 
 
+// }
+
+function change(){
+    const colorInput = document.getElementById("colorInput")
+    const textInput=document.getElementById("textInput")
+    const myParagraph=document.getElementById("myParagraph")
+
+    const newColor= colorInput.value 
+    const newText= textInput.value
+
+    myParagraph.style.backgroundColor= newColor
+    myParagraph.innerText=newText
 }
