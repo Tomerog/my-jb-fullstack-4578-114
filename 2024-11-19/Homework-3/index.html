@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script defer src="assets/js/app.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="colorTable" onsubmit="addToTable(event)">
+      <label for="color">color</label>
+      <input required id="color" type="text" min="3" max="20" />
+      <br /><br />
+      <button>add to list</button>
+    </form>
+    <table>
+      <thead>
+        <th>color name</th>
+        <th>Da color</th>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p id="amount"></p>
+  </body>
+</html>

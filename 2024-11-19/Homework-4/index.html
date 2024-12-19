@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script defer src="assets/js/app.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="imagesTable" onsubmit="addToTable(event)">
+      <label for="imageDescription">imageDescription :</label>
+      <input required id="imageDescription" type="text" />
+      <br /><br />
+      <label for="imageUrl">imageUrl :</label>
+      <input required id="imageUrl" type="url" />
+      <br /><br />
+      <button>add to list</button>
+    </form>
+    <table>
+      <thead>
+        <th>description</th>
+        <th>Da image</th>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p id="amount"></p>
+  </body>
+</html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
   </head>
   <body>
     <h1 class="headlinename">חנות החיות המגניבה בארץ!</h1>
@@ -16,7 +17,7 @@
     </nav>
     <p class="bold-text">צרו קשר:</p>
 
-    <form action="save.html" method="post">
+    <form action="save.html" method="get" onsubmit="formSubmit(event)">
       <label for="firstname">שם פרטי:</label>
       <input type="text" id="firstname" name="firstname" />
       <br />
@@ -27,18 +28,26 @@
       <br />
       <label for="gender">מין:</label>
       <br />
-      <input type="radio" id="gender" name="gender" value="זכר" />
+      <input type="radio" id="genderMale" name="gender" value="זכר" />
       <label for="זכר">זכר</label>
       <br />
-      <input type="radio" id="gender" name="gender" value="female" />
+      <input type="radio" id="genderFemale" name="gender" value="female" />
       <label for="female">נקבה</label>
       <br />
       <br />
-      <select></select>
+      <label>לא ידוע:</label>
+      <select id="select">
+        <option disabled selected>placeholder</option>
+        <option value="kiril">kiril</option>
+      </select>
       <br />
       <br />
       <label for="messege">הודעה:</label>
       <textarea id="messege"></textarea>
+      <br />
+      <br />
+      <button type="submit">send</button>
+      <button>clear</button>
     </form>
 
     <p class="copyright">&copy; כל הזכויות שמורות</p>

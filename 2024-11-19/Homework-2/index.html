@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script defer src="assets/js/app.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="gradeSheet" onsubmit="addToList(event)">
+      <label for="firstName">first Name</label>
+      <input required id="firstName" type="text" />
+      <br /><br />
+
+      <label for="lastName">last Name</label>
+      <input required id="lastName" type="text" />
+      <br /><br />
+
+      <label for="grade">grade</label>
+      <input required id="grade" type="number" min="0" />
+      <br /><br />
+      <button>add to list</button>
+    </form>
+    <ol id="list"></ol>
+    <p id="average"></p>
+  </body>
+</html>
