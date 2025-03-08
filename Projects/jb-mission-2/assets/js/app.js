@@ -1,207 +1,141 @@
-const todos = [
-    {
-      "userId": 1,
-      "id": 1,
-      "title": "delectus aut autem",
-      "completed": false
-    },
-    {
-      "userId": 1,
-      "id": 2,
-      "title": "quis ut nam facilis et officia qui",
-      "completed": false
-    },
-    {
-      "userId": 2,
-      "id": 3,
-      "title": "fugiat veniam minus",
-      "completed": false
-    },
-    {
-      "userId": 2,
-      "id": 4,
-      "title": "et porro tempora",
-      "completed": true
-    },
-]
-
-[1, 2]
-
-const arr = [
-    [
-    ],
-    [
-        {
-            "userId": 1,
-            "id": 3,
-            "title": "fugiat veniam minus",
-            "completed": false
-          },
-          {
-            "userId": 1,
-            "id": 4,
-            "title": "et porro tempora",
-            "completed": true
-          },
-    ],
-    [
-        {
-            "userId": 2,
-            "id": 3,
-            "title": "fugiat veniam minus",
-            "completed": false
-          },
-          {
-            "userId": 3,
-            "id": 4,
-            "title": "et porro tempora",
-            "completed": true
-          },
-
-    ]
-]
-
-const result = [
-    {
-        userId: 1,
-        completed: 0,
-        incompleted: 2
-    },
-    {
-        userId: 2,
-        completed: 1,
-        incompleted: 1
-    },
-
-]
-
-
 "use strict";
 
 (() => {
-
-    const getData = (url) => {
-        // const response = await fetch(url)
-        // const users = await response.json()
-        // return users
-        return fetch(url).then(response => response.json())
+    
+    const getData = (url)=>{
+        return fetch(url).then(response=>response.json())
     }
 
-    const generateUsersTable = todos => {
+    const findUserSelection = ()=> {return `https://restcountries.com/v3.1/name/${document.getElementById(`countryPicker`).value}`}
+
+    
+
+    const generateSelected = (countries) => {
+        
+        const totalCountries = countries.length;
+        const totalPopulation = countries.reduce((sum, country) => sum + (country.population || 0), 0);
+        const averagePopulation = totalPopulation / totalCountries;
+
+        const statsHTML = `
+            <span>Total countries result: ${totalCountries}</span><br><br>
+            <span>Total Countries Population: ${totalPopulation}</span><br><br>
+            <span>Average Population: ${averagePopulation.toFixed(2)}</span><br><br>
+        `;
 
         
-        
-        
-        // const userIds = todos.map(todo => todo.userId)
-        // const usersSet = new Set(userIds)
-        // const userIdsUnique = [...usersSet]
-        const userIdsUnique = [...new Set(todos.map(todo => todo.userId))]
-        const result = userIdsUnique
-            // .map(userId => {
-            //     return {
-            //         userId,
-            //         completed: todos.filter(todo => todo.userId === userId && todo.completed).length,
-            //         incompleted: todos.filter(todo => todo.userId === userId && !todo.completed).length 
-            //     }
-            // })
-            .map(userId => ({
-                    userId,
-                    completed: todos.filter(todo => todo.userId === userId && todo.completed).length,
-                    incompleted: todos.filter(todo => todo.userId === userId && !todo.completed).length 
-                })
-            )
-            .map(user => `
-                <tr>
-                    <td>${user.userId}</td>
-                    <td>${user.completed}</td>
-                    <td>${user.incompleted}</td>
-                </tr>
-            `)
-            .reduce((cum, cur) => cum + cur, '')
-
-
-
-        // console.log(userIds)
-
-        // const result = todos
-
-        // // complete missing code...
-
-        // console.log(result)
-
-        return result
-    }
-
-    const generateStatsTable = todos => {
-
-        const totalTodos = todos.length
-        const completedTodos = todos.filter(todo => todo.completed).length
-        const incompletedTodos = totalTodos - completedTodos
-        const completeRatio = completedTodos/totalTodos * 100
-
-        return `
-            <tr>
-                <td>total todos:</td>
-                <td>${totalTodos}</td>
-            </tr>
-            <tr>
-                <td>total completed todos:</td>
-                <td>${completedTodos}</td>
-            </tr>
-            <tr>
-                <td>total incompleted todos:</td>
-                <td>${incompletedTodos}</td>
-            </tr>
-            <tr>
-                <td>complete ratio:</td>
-                <td>${completeRatio}%</td>
-            </tr>
-        `
-    }
-
-    const generateTodosTable = todos => {
-        const newHTML = todos
-            .map(todo => {
-                const { userId, title, completed } = todo // deconstruction
+        const countriesHTML = countries
+            .map(country => {
                 return `
                     <tr>
-                        <td>${userId}</td>
-                        <td>${title}</td>
-                        <td>${completed ? 'Yes' : 'No'}</td>
+                        <td>${country.name.official}</td>
+                        <td>${country.population}</td>
                     </tr>
-                `
+                `;
             })
-            .reduce((cumulative, current) => cumulative + current, '')
-        return newHTML
+            .reduce((cumulative, current) => cumulative + current, '');
+        
+        return { statsHTML, countriesHTML};
     }
 
-    const renderTodosTable = newHTML => document.getElementById('todos').innerHTML = newHTML
+    const generateRegionStats = (countries) => {
+        const regions = [...new Set(countries.flatMap(country => country.continents))];
+        
+        const generatesStatsHTML = regions
+            .map(region => {
+                const count = countries.filter(country => country.continents.includes(region)).length;
+                return `
+                    <tr>
+                        <td>${region}</td>
+                        <td>${count}</td>
+                    </tr>
+                `;
+            })
+            .reduce((cumulative, current) => cumulative + current, '');
+    
+        return generatesStatsHTML;
+    };
+    
+    const generateLanguageStats = (countries) => {
+        const arrayOfLanguages = [
+            ...new Set(countries.flatMap(country => 
+                country.languages ? Object.values(country.languages) : []
+            ))
+        ];
+    
+        const generatesLanguagesHTML = arrayOfLanguages
+            .map(Language => {
+                const count = countries.filter(country => 
+                    country.languages && Object.values(country.languages).includes(Language)
+                ).length;
+    
+                return `
+                    <tr>
+                        <td>${Language}</td>    
+                        <td>${count}</td>
+                    </tr>
+                `;
+            })
+            .reduce((cumulative, current) => cumulative + current, '');
+    
+        return generatesLanguagesHTML;
+    };
+    
+        
+    
+    const renderCountries = (countriesHTML) => {
+        document.getElementById('showContent').innerHTML = countriesHTML;
+    }
+    const renderStats = (statsHTML) => {
+        document.getElementById('stats').innerHTML = statsHTML;
+    }
+    const renderRegionStats = (statsHTML) => {
+        document.getElementById('regionStats').innerHTML = statsHTML;
+    }
+    const renderLanguageStats = (statsHTML) => {
+        document.getElementById('languageStats').innerHTML = statsHTML;
+    }
 
-    const renderStatsTable = newHTML => document.getElementById('stats').innerHTML = newHTML
 
-    const renderUsersTable = newHTML => document.getElementById('users').innerHTML = newHTML
+    
 
-    document.getElementById('button').addEventListener('click', async () => {
+
+    const selectButton =async (event) =>{
         try {
-
-            // get data
-            const todos = await getData('https://jsonplaceholder.typicode.com/todos')
-
-            // generate html
-            const todosTableHTML = generateTodosTable(todos)
-            const statsTableHTML = generateStatsTable(todos)
-            const usersTableHTML = generateUsersTable(todos)
-
-            // render html
-            renderTodosTable(todosTableHTML)
-            renderStatsTable(statsTableHTML)
-            renderUsersTable(usersTableHTML)
+            event.preventDefault()
+            const countries = await getData(findUserSelection())
+            const { statsHTML, countriesHTML } = generateSelected(countries);
+            const regionStatsHTML = generateRegionStats(countries)
+            const LanguageStatsHTML = generateLanguageStats(countries)
+            renderStats(statsHTML);
+            renderCountries(countriesHTML);
+            renderRegionStats(regionStatsHTML);
+            renderLanguageStats(LanguageStatsHTML)
             
-        } catch (e) {
-            console.warn(e)
+        } catch (error) {
+            console.warn(error)
         }
-    })
+    }
 
+    const allButton =async (event) =>{
+        try {
+            event.preventDefault()
+            const countries = await getData(`https://restcountries.com/v3.1/all`)
+            const { statsHTML, countriesHTML } = generateSelected(countries);
+            const regionStatsHTML = generateRegionStats(countries)
+            const LanguageStatsHTML = generateLanguageStats(countries)
+            renderStats(statsHTML);
+            renderCountries(countriesHTML);
+            renderRegionStats(regionStatsHTML);
+            renderLanguageStats(LanguageStatsHTML)
+        } catch (error) {
+            console.warn(error)
+        }
+    }
+
+     
+    document.getElementById(`Search`).addEventListener(`click`,(event) => selectButton(event))
+    document.getElementById(`showAll`).addEventListener(`click`,(event) => allButton(event))
+    
 })()
 
 
